@@ -1,4 +1,5 @@
 import numpy as np
+import plot_perceptron
 
 def learn_perceptron(neg_example_nobias, pos_examples_nobias, w_init, w_gen_feas):
     # the size of input
@@ -25,10 +26,11 @@ def learn_perceptron(neg_example_nobias, pos_examples_nobias, w_init, w_gen_feas
     num_errs = len(mistakes0) + len(mistakes1)
     num_err_history.append(num_errs)
 
-    print "Number of errors in iteration %d: \t %d\n"%(iteration, num_errs)
-    print "Weights:\t",np.transpose(w),'\n'
+    print("Number of errors in iteration %d: \t %d\n"%(iteration, num_errs))
+    print("Weights:\t",np.transpose(w),'\n')
 
-    plot_perceptron()
+    plot_perceptron(neg_example, pos_example, mistakes0, mistakes1,
+                    )
 
 
 def eval_perceptron(neg_examples, pos_examples, w):
