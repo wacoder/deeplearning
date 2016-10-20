@@ -1,2 +1,2 @@
-# deeplearning (Neural network for machine learning by Geoffrey Hinton)
+# Neural network for machine learning by Geoffrey Hinton
 ## the python reimplementation 
