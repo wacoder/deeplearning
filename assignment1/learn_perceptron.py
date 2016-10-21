@@ -68,6 +68,8 @@ def update_weights(neg_examples, pos_examples, w_current):
     return w
 
 
+
+
 def eval_perceptron(neg_examples, pos_examples, w):
     num_neg_examples = len(neg_examples)
     num_pos_examples = len(pos_examples)
@@ -82,5 +84,6 @@ def eval_perceptron(neg_examples, pos_examples, w):
     for index, element in enumerate(pos_examples):
         if (np.dot(element,w) < 0):
             mistakes1.append(index)
+
 
     return(mistakes0, mistakes1)
