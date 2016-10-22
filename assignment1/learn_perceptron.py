@@ -29,8 +29,8 @@ def learn_perceptron(neg_example_nobias, pos_examples_nobias, w_init, w_gen_feas
     print("Number of errors in iteration %d: \t %d\n"%(iteration, num_errs))
     print("Weights:\t",np.transpose(w),'\n')
 
-    plot_perceptron.plot_perceptron(neg_example, pos_example, mistakes0, mistakes1,
-                    num_err_history, w, w_dist_history)
+    #plot_perceptron.plot_perceptron(neg_example, pos_example, mistakes0, mistakes1,
+    #                num_err_history, w, w_dist_history)
 
     # control the procedure
     key = input('<Press enter to continue, q to quit.>>')
@@ -50,6 +50,23 @@ def learn_perceptron(neg_example_nobias, pos_examples_nobias, w_init, w_gen_feas
         w = update_weights(neg_example, pos_example, w)
         print(w)
 
+        if len(w_gen_feas) != 0:
+            w_dist_history.append(np.linalg.norm(w - w_gen_feas))
+
+        [mistakes0, mistakes1] = eval_perceptron(neg_example, pos_example, w)
+        num_errs = len(mistakes0)+len(mistakes1)
+
+        num_err_history.append(num_errs)
+
+        print("Number of the iteration %d: \t %d\n" %(iteration,num_errs))
+
+        #plot_perceptron.plot_perceptron(neg_example, pos_example, mistakes0, mistakes1,
+        #               num_err_history, w, w_dist_history)
+
+        key = input("<Press enter to continue, q to quit>")
+        if key == 'q':
+            return
+
 
 def update_weights(neg_examples, pos_examples, w_current):
     w = w_current
@@ -58,13 +75,19 @@ def update_weights(neg_examples, pos_examples, w_current):
 
     for element in neg_examples:
         activation = np.dot(element,w)
-        key = input()
+
         if activation >= 0:
-            w -= np.transpose(np.array(element))
+            for index in range(len(w)):
+                print(index)
+                w[index] -= element[index]
+            print(w)
+
     for element in pos_examples:
         activation = np.dot(element,w)
         if activation < 0:
-            w += np.transpose(element)
+            for index in range(len(w)):
+                w[index] += element[index]
+            print(w)
     return w
 
 
