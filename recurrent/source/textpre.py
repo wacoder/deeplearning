@@ -8,7 +8,7 @@ def textpre_w2v(path):
     sentences = []
     sentence_start_token = "SENTENCE_START"
     sentence_end_token = "SENTENCE_END"
-    unknown_token = "UNKOWN_TOKEN"
+    unknown_token = "UNKNOWN_TOKEN"
     vocabulary_size = 6000
 
     file_speech = open(path)
