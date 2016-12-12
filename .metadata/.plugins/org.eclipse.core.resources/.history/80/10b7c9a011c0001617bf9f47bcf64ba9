@@ -1,0 +1,24 @@
+package javaso;
+import java.util.HashMap;
+
+public class Solution {
+	public static void main(String[] args) {
+		
+	}
+	
+	public static int lengthOfLongestSubstring(String s) {
+		HashMap<Character, Integer> hm = new HashMap();
+		int num = 0;
+		int left = -1;
+		for (int i = 0; i < s.length(); i++) {
+			if (hm.containsKey(s.charAt(i)) && hm.get(s.charAt(i)) > left) {
+					left = hm.get(s.charAt(i));
+			} 
+			num = Math.max(i - left, num);
+			hm.put(s.charAt(i), i);
+			
+		}
+		
+		return 1;
+	}
+}

@@ -1,0 +1,13 @@
+package twosum;
+import java.util.HashMap;
+
+public class TwoSum {
+	public static void main(String[] args) {
+		
+	}
+	public int[] twoSum(int[]jnums, int target) {
+		HashMap hm = new HashMap();
+	
+		return
+	}	
+}

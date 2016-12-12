@@ -1,6 +1,6 @@
 import numpy as np
 from utils import softmax
-
+from textpre import textpre_w2v
 class RNNnp:
 
     def __init__(self, word_dim, hidden_dim=100, bptt_truncate=4):
@@ -40,12 +40,31 @@ class RNNnp:
         o,s = self.forward_prop(x)
         return np.argmax(o,axis=1)
 
+    def calculate_loss(self, x, y):
+        L = 0
+
+        for i in range(len(y)):
+            o, s = self.forward_prop(x[i])
+            correct_prediction = o[range(len(y[i])), y[i]]
+
+            L -= np.sum(np.log(correct_prediction))
+        return L
+
+    def calculate_total_loss(self,x,y):
+        N = np.sum(len(y_i) for y_i in y)
+        return self.calculate_loss(x,y)/N
+
+
 
 if __name__ == "__main__":
-    x = np.asarray([[1,0,0],[0,1,0]])
-    model = RNNnp(3)
-    output = model.predict(x)
-    print output
+    np.random.seed(10)
+    x, y, dict_my = textpre_w2v('../data/speeches.txt')
+    model = RNNnp(len(dict_my))
+    o,s = model.forward_prop(x[10])
+
+
+    print "Expected loss is %f" %(np.log(len(dict_my)))
+    print "Actual loss is {:f}".format(model.calculate_total_loss(x[:1000],y[:1000]))
 
 
 

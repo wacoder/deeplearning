@@ -1,0 +1,10 @@
+package addtwonumber;
+
+public class AddTwoNumber {
+	public static void main(String[] args) {
+		String s = "wangingag";
+		System.out.println(s[1:3]);
+	}
+	
+
+}
