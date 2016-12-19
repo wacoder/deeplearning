@@ -1,0 +1,60 @@
+package findmedian;
+
+public class Solution {
+	public static void main(String[] args) {
+		int[] A = {1};
+		int[] B = {1};
+		System.out.println(findMedianSortedArrays(A,B));
+	}
+	
+	public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int len = nums1.length+nums2.length;
+        System.out.println(len);
+        if (len % 2==1) {
+        	return findKNum(nums1,0,nums2,0,len/2+1);
+        }
+        else {
+        	double bigger = findKNum(nums1,0,nums2,0,len/2);
+        	double smaller = findKNum(nums1,0,nums2,0,len/2+1);
+        	return (bigger + smaller)/2;
+        	
+        }
+    }
+	
+	public static double findKNum(int[] A, int start_A, int[] B, int start_B, int k) {
+		int len1 = A.length-start_A;
+		int len2 = B.length-start_B;
+
+		
+		if(len1 == 0) {
+			return (double)B[k-1];
+		}
+		
+		if(len2 == 0) {
+			return (double)A[k-1];
+		}
+		
+		if(k == 1) {
+			return (double)Math.min(A[start_A], B[start_B]);
+		}
+		
+		int off_limit = Math.min(A[0],B[0])-1;
+		int mid_A = off_limit;
+		int mid_B = off_limit;
+		
+		if(A.length >= k/2)
+			mid_A = A[k/2-1];
+		if(B.length >= k/2)
+			mid_B = B[k/2-1];
+		
+		if(mid_B == off_limit ||(mid_A != off_limit && mid_A < mid_B)) {
+			return findKNum(A, k/2, B, start_B, k - k/2);
+		} 
+		
+		return findKNum(A, start_A, B, k/2, k-k/2);
+		
+		
+		
+	}
+}
+

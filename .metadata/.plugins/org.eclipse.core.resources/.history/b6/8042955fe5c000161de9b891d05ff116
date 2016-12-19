@@ -1,0 +1,25 @@
+package zigzag;
+
+public class Solution {
+	public static void main(String[] args) {
+		String res = "";
+		res += 'c';
+		System.out.println(res);
+		System.out.println(convert("PAYPALISHIRING", 3));
+	}
+	
+	public static String convert(String s, int numRows) {
+		String res = "";
+		for(int i = 0; i < numRows; i++) {
+			int index = i;
+			int span = 2*numRows-2*i-2;
+			while(index < s.length()) {
+				res += s.charAt(index);
+				index += span;
+			}
+		}
+		System.out.println(res);
+		return res;
+	}
+
+}
